@@ -11,7 +11,7 @@
             <Title id="app_title" text="{i18n>title}" />
         </s:titleHeading>
         <s:content>
-            <Table id="main_table" headerText="{i18n>main.table.title}">
+            <Table items="{/customers}" id="main_table" headerText="{i18n>main.table.title}">
                 <columns>
                     <Column id="idMainColumn">
                         <Text id="main_text_customerid" text="{i18n>app.customerid}"/>
@@ -28,6 +28,9 @@
                     <Column id="main_column_gender" minScreenWidth="Desktop">
                         <Text id="main_text_gender" text="{i18n>app.gender}"/>
                     </Column>
+                    <Column id="main_column_birthdate" minScreenWidth="Desktop">
+                        <Text id="main_text_birthdate" text="{i18n>app.birthdate}"/>
+                    </Column>
                     <Column id="main_column_email" minScreenWidth="Desktop">
                         <Text id="main_text_email" text="{i18n>app.email}"/>
                     </Column>
@@ -38,21 +41,22 @@
                         <Text id="main_text_website" text="{i18n>app.website}"/>
                     </Column>
                 </columns>
-                <items>
-                    <ColumnListItem id="app_columnListItem">
-                        <cells>
-                            <ObjectIdentifier id="app_objectIdentifier" title="1000001"/>
-                            <Text id="app_vorname" text="Max"/>
-                            <Text id="app_nachname" text="Mustermann"/>
-                            <Text id="app_degree" text="Dr."/>
-                            <Text id="app_gender" text="male"/>
-                            <Text id="app_email" text="max.mustermann@clouddna.at"/>
-                            <Text id="app_tel" text="+43676123123"/>
-                            <Link id="app_link" text="www.clouddna.at" href="https://{www.clouddna.at}" target="_blank"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
+                    <items>
+                        <ColumnListItem id="app_columsn">
+                            <cells>
+                                <ObjectIdentifier id="app_objectidentifier" title="{Customerid}"/>
+                                <Text id="app_Firstname" text="{Firstname}"/>
+                                <Text id="app_Lastname" text="{Lastname}"/>
+                                <Text id="app_Title" text="{Title}"/>
+                                <Text id="app_Vorname" text="{Birthdate}"/>
+                                <Text id="app_Email" text="{Email}"/>
+                                <Text id="app_Phone" text="{Phone}"/>
+                                <Link id="app_link" text="{Website}" href="https://{Website}" target="_blank"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
             </Table>
+            
         </s:content>
     </s:SemanticPage>
 </mvc:View>
