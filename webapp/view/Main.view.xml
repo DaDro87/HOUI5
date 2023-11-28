@@ -42,13 +42,14 @@
                     </Column>
                 </columns>
                     <items>
-                        <ColumnListItem id="app_columsn">
+                        <ColumnListItem id="app_columnlist" type="Navigation" press="onListItemClicked">
                             <cells>
                                 <ObjectIdentifier id="app_objectidentifier" title="{Customerid}"/>
                                 <Text id="app_Firstname" text="{Firstname}"/>
                                 <Text id="app_Lastname" text="{Lastname}"/>
                                 <Text id="app_Title" text="{Title}"/>
-                                <Text id="app_Vorname" text="{Birthdate}"/>
+                                <Text id="app_gender" text="{path:'Gender', formatter: '.genderFormatter'}"/>
+                                <Text id="app_date" text="{path: 'Birthdate', formatter: '.dateFormatter'}"/>
                                 <Text id="app_Email" text="{Email}"/>
                                 <Text id="app_Phone" text="{Phone}"/>
                                 <Link id="app_link" text="{Website}" href="https://{Website}" target="_blank"/>
@@ -56,7 +57,7 @@
                         </ColumnListItem>
                     </items>
             </Table>
-            
+
         </s:content>
     </s:SemanticPage>
 </mvc:View>
