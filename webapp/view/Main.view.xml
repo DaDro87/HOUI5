@@ -26,7 +26,7 @@
                         <Text id="main_text_title" text="{i18n>app.title}"/>
                     </Column>
                     <Column id="main_column_gender" minScreenWidth="Desktop">
-                        <Text id="main_text_gender" text="{i18n>app.gender}"/>
+                        <Text id="gender" text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
                     </Column>
                     <Column id="main_column_birthdate" minScreenWidth="Desktop">
                         <Text id="main_text_birthdate" text="{i18n>app.birthdate}"/>

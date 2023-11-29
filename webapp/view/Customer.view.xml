@@ -10,7 +10,7 @@
     <u:ObjectPageLayout
         id="ObjectPageLayout"
         showTitleInHeaderContent="true"
-        showFooter="{= ${viewModel>/editMode}}"
+        showFooter="{= ${editModel>/editMode}}"
         upperCaseAnchorBar="false"
     >
         <u:headerTitle>
@@ -23,7 +23,7 @@
                 </u:expandedHeading>
                 <u:actions>
                     <Button id="app_edit_button" text="{i18n>edit}" type="Emphasized" icon="sap-icon://edit" 
-                    press="onEditPressed" visible="{= !${viewModel>/editMode}}" />
+                    press="onEditPressed" visible="{= !${editModel>/editMode}}" />
 				</u:actions>
             </u:ObjectPageDynamicHeaderTitle>
         </u:headerTitle>
@@ -31,9 +31,9 @@
             <Toolbar id="app_bar_footer">
                 <ToolbarSpacer />
                 <Button id="app_save_button" text="{i18n>save}" type="Accept" icon="sap-icon://save" 
-                press="onSavePressed" visible="{= ${viewModel>/editMode}}" />
+                press="onSavePressed" visible="{= ${editModel>/editMode}}" />
                 <Button id="app_cancel_button" text="{i18n>cancel}" type="Reject" icon="sap-icon://cancel" 
-                press="onCancelPressed" visible="{= ${viewModel>/editMode}}" />
+                press="onCancelPressed" visible="{= ${editModel>/editMode}}" />
             </Toolbar>
         </u:footer>
     </u:ObjectPageLayout>

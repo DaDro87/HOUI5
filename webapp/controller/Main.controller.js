@@ -16,11 +16,16 @@ sap.ui.define([
             },
 
             onListItemClicked: function(oEvent) {
-                let path = oEvent.getSource().getBindingContext().getPath().substring(1);
+                const sPath = oEvent.getSource().getBindingContext().getPath();
+            
                 this.getOwnerComponent().getRouter().navTo("RouteCustomer", {
                     path: encodeURIComponent(sPath)
                 }, false);
             },
+
+            onCreatePressed: function() {
+                this.getOwnerComponent().getRouter().navTo("CreateCustomer", null, false);
+            }
 
 
         });

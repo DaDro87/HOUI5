@@ -23,7 +23,7 @@
                         <Text  text="{Title}" />
 
                         <Label text="{i18n>app.gender}" labelFor="gender" />
-                        <Text  text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
+                        <Text  text="{= ${gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
 
                         <Label text="{i18n>app.email}" labelFor="email" />
                         <Text  text="{Email}" />
