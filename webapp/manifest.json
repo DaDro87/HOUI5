@@ -14,6 +14,16 @@
       "id": "@sap/generator-fiori:basic",
       "version": "1.11.5",
       "toolsId": "8985ed8e-9365-4d9f-91b9-93fdb69501b1"
+    },
+    "dataSources": {
+      "Z_HOUI5_CUSTOMER_UI_V2": {
+        "uri": "/sap/opu/odata/sap/Z_HOUI5_CUSTOMER_UI_V2/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml"
+        }
+      }
     }
   },
   "sap.ui": {
@@ -59,8 +69,13 @@
         }
       },
       "": {
-        "type": "sap.ui.model.json.JSONModel",
-        "uri": "data/customers.json"
+        "dataSource": "Z_HOUI5_CUSTOMER_UI_V2",
+        "preload": true,
+        "settings": {
+          "defaultBindingMode": "TwoWay",
+          "defaultCountMode": "Inline",
+          "refreshAfterChange": false
+        }
       },
       "genderModel": {
         "type": "sap.ui.model.json.JSONModel",

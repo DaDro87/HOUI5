@@ -25,7 +25,7 @@
                         <Label text="{i18n>app.gender}" labelFor="gender" />
                         <Select id="gender" selectedKey="{Gender}" items="{genderModel>/genders}">
                             <items>
-                                <core:Item key="{genderModel>key}" text="{path: 'genderModel>text', formatter: '.genderFormatter'}" />
+                                <core:Item key="{genderModel>key}" text="{path: 'genderModel>text', formatter: '.formatter.gender'}" />
                             </items>
                         </Select>
 
@@ -39,7 +39,7 @@
                         <Input id="website" value="{Website}" />
 
                         <Label text="{i18n>app.birthdate}" labelFor="birthdate" />
-                        <Input id="birthdate" type="Date" value="{Birthdate}" />
+                        <DatePicker value="{Birthdate}" />
                     </f:SimpleForm>
                 </u:blocks>
             </u:ObjectPageSubSection>             

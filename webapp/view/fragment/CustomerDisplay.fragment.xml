@@ -11,31 +11,31 @@
                 <u:blocks>
                     <f:SimpleForm title="{Firstname} {Lastname}" editable="true">
                         <Label text="{i18n>app.customerid}" labelFor="customerid" />
-                        <Text id="customerid" text="{Customerid}" />
+                        <Text  text="{Customerid}" />
 
                         <Label text="{i18n>app.firstname}" labelFor="firstname" />
-                        <Text id="firstname" text="{Firstname}" />
+                        <Text  text="{Firstname}" />
 
                         <Label text="{i18n>app.lastname}" labelFor="lastname" />
-                        <Text id="lastname" text="{Lastname}" />
+                        <Text  text="{Lastname}" />
 
                         <Label text="{i18n>app.title}" labelFor="title" />
-                        <Text id="title" text="{Title}" />
+                        <Text  text="{Title}" />
 
                         <Label text="{i18n>app.gender}" labelFor="gender" />
-                        <Text id="gender" text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
+                        <Text  text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
 
                         <Label text="{i18n>app.email}" labelFor="email" />
-                        <Text id="email" text="{Email}" />
+                        <Text  text="{Email}" />
 
                         <Label text="{i18n>app.phone}" labelFor="phone" />
-                        <Text id="phone" text="{Phone}" />
+                        <Text  text="{Phone}" />
 
                         <Label text="{i18n>app.website}" labelFor="website" />
-                        <Text id="website" text="{Website}" />
+                        <Text  text="{Website}" />
 
                         <Label text="{i18n>app.birthdate}" labelFor="birthdate" />
-                        <Text id="birthdate" text="{path: 'Birthdate', formatter: '.dateFormatter'}" />
+                        <Text  text="{path: 'Birthdate', formatter: '.dateFormatter'}" />
                     </f:SimpleForm>
                 </u:blocks>
             </u:ObjectPageSubSection>             

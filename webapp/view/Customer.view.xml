@@ -10,7 +10,7 @@
     <u:ObjectPageLayout
         id="ObjectPageLayout"
         showTitleInHeaderContent="true"
-        showFooter="{= ${editModel>/editmode}}"
+        showFooter="{= ${viewModel>/editMode}}"
         upperCaseAnchorBar="false"
     >
         <u:headerTitle>
@@ -22,36 +22,18 @@
                     </HBox>
                 </u:expandedHeading>
                 <u:actions>
-                    <Button
-                        id="app_edit_button"
-                        text="{i18n>edit}"
-                        type="Emphasized"
-                        icon="sap-icon://edit"
-                        press="onEditPressed"
-                        visible="{= !${editModel>/editmode}}"
-                    />
-                </u:actions>
+                    <Button id="app_edit_button" text="{i18n>edit}" type="Emphasized" icon="sap-icon://edit" 
+                    press="onEditPressed" visible="{= !${viewModel>/editMode}}" />
+				</u:actions>
             </u:ObjectPageDynamicHeaderTitle>
         </u:headerTitle>
         <u:footer>
             <Toolbar id="app_bar_footer">
                 <ToolbarSpacer />
-                <Button
-                    id="app_save_button"
-                    text="{i18n>save}"
-                    type="Accept"
-                    icon="sap-icon://save"
-                    press="onSavePressed"
-                    visible="{= ${editModel>/editmode}}"
-                />
-                <Button
-                    id="app_cancel_button"
-                    text="{i18n>cancel}"
-                    type="Reject"
-                    icon="sap-icon://cancel"
-                    press="onCancelPressed"
-                    visible="{= ${editModel>/editmode}}"
-                />
+                <Button id="app_save_button" text="{i18n>save}" type="Accept" icon="sap-icon://save" 
+                press="onSavePressed" visible="{= ${viewModel>/editMode}}" />
+                <Button id="app_cancel_button" text="{i18n>cancel}" type="Reject" icon="sap-icon://cancel" 
+                press="onCancelPressed" visible="{= ${viewModel>/editMode}}" />
             </Toolbar>
         </u:footer>
     </u:ObjectPageLayout>

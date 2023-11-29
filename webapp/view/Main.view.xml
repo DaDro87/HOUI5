@@ -11,7 +11,7 @@
             <Title id="app_title" text="{i18n>title}" />
         </s:titleHeading>
         <s:content>
-            <Table items="{/customers}" id="main_table" headerText="{i18n>main.table.title}">
+            <Table items="{/Z_P_CUSTOMER}" id="main_table" headerText="{i18n>main.table.title}">
                 <columns>
                     <Column id="idMainColumn">
                         <Text id="main_text_customerid" text="{i18n>app.customerid}"/>
@@ -48,8 +48,8 @@
                                 <Text id="app_Firstname" text="{Firstname}"/>
                                 <Text id="app_Lastname" text="{Lastname}"/>
                                 <Text id="app_Title" text="{Title}"/>
-                                <Text id="app_gender" text="{path:'Gender', formatter: '.genderFormatter'}"/>
-                                <Text id="app_date" text="{path: 'Birthdate', formatter: '.dateFormatter'}"/>
+                                <Text text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"/>
+                                <Text id="app_date" text="{path: 'Birthdate', formatter: '.formatter.date'}"/>
                                 <Text id="app_Email" text="{Email}"/>
                                 <Text id="app_Phone" text="{Phone}"/>
                                 <Link id="app_link" text="{Website}" href="https://{Website}" target="_blank"/>

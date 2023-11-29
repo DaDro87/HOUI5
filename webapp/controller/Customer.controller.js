@@ -2,12 +2,17 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
+    "sap/ui/core/Fragment",
+    "at/clouddna/training02/zhoui5/data/formatter/Formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, JSONModel, Fragment) {
+    function (Controller,
+	MessageBox,
+	JSONModel,
+	Fragment,
+	Formatter) {
     /* ... */
         "use strict";
 
@@ -15,21 +20,34 @@ sap.ui.define([
 
             _fragmentList: {},
 
+            formatter: Formatter,
+
             onInit: function () {
+
+                this.getOwnerComponent().getRouter().getRoute("RouteCustomer").attachPatternMatched(this._onPatternMatched, this);
+            
+                let oJSONModel = new JSONModel({
+                    editMode: false
+                });
+
+                this.getView().setModel(oJSONModel, "viewModel");
+
+                this._showCustomerFragment("CustomerDisplay");
                 
+                /*
                 const oRouter = this.getOwnerComponent().getRouter();
                 const oEditModel = new JSONModel({
                     editmode: false
                 });
-            
+
                 this.setContentDensity();
             
                 this.getView().setModel(oEditModel, "editModel");
-
-                this._showCustomerFragment("CustomerDisplay");
-            
+                            
                 oRouter.getRoute("RouteCustomer").attachPatternMatched(this._onPatternMatched, this);
                 oRouter.getRoute("CreateCustomer").attachPatternMatched(this._onCreatePatternMatched, this);
+
+                */
             },
             
             _showCustomerFragment: function(sFragmentName) {
@@ -42,7 +60,7 @@ sap.ui.define([
                 } else {
                     Fragment.load({
                         id: this.getView().createId(sFragmentName),
-                        name: "at.clouddna.training00.zhoui5.view.fragment." + sFragmentName,
+                        name: "at.clouddna.training02.zhoui5.view.fragment." + sFragmentName,
                         controller: this
                     }).then(function(oFragment) {
                         this._fragmentList[sFragmentName] = oFragment;
@@ -55,9 +73,9 @@ sap.ui.define([
             },
             
             _toggleEdit: function(bEditMode){
-                let oEditModel = this.getView().getModel("editModel");
+                let oEditModel = this.getView().getModel("viewModel");
                         
-                oEditModel.setProperty("/editmode", bEditMode);
+                oEditModel.setProperty("/editMode", bEditMode);
                         
                 this._showCustomerFragment(bEditMode ? "CustomerEdit" : "CustomerDisplay");
               },
@@ -73,8 +91,6 @@ sap.ui.define([
             onCancelPressed: function(){
                 this._toggleEdit(false);
             },
-
-            onInit: function () {
 
             _onPatternMatched: function(oEvent) {
                 let path = decodeURIComponent(oEvent.getParameters().arguments["path"]);
