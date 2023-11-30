@@ -3,7 +3,8 @@ sap.ui.define([
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
-    "at/clouddna/training02/zhoui5/data/formatter/Formatter"
+    "at/clouddna/training02/zhoui5/data/formatter/Formatter",
+    "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -12,7 +13,8 @@ sap.ui.define([
 	MessageBox,
 	JSONModel,
 	Fragment,
-	Formatter) {
+	Formatter,
+    History) {
     /* ... */
         "use strict";
 
@@ -104,34 +106,35 @@ sap.ui.define([
                 }
             },
             
-              onSavePressed: function () {
-                const oModel = this.getView().getModel();
-                const sSuccessText = this.bCreate ? this.getLocalizedText("dialog.create.success") : this.getLocalizedText("dialog.edit.success");
-            
-                this.getView().setBusy(true);
-            
-                oModel.submitChanges({
-                    success: (oData, response) => {
-                        this.getView().setBusy(false);
-            
-                        MessageBox.success(sSuccessText, {
-                            onClose: () => {
-                                if (this.bCreate) {
-                                    this._toggleEdit(false);
-                                    oModel.refresh(true);
-                                    this.onNavBack();
-                                } else {
-                                    this._toggleEdit(false);
-                                }
+            onSavePressed: function () {
+            const oModel = this.getView().getModel();
+            const sSuccessText = this.bCreate ? this.getView().getModel("i18n").getResourceBundle().getText("dialog.create.success") : this.getView().getModel("i18n").getResourceBundle().getText("dialog.edit.success");
+        
+            this.getView().setBusy(true);
+        
+            oModel.submitChanges({
+                success: (oData, response) => {
+                    this.getView().setBusy(false);
+        
+                    MessageBox.success(sSuccessText, {
+                        onClose: () => {
+                            if (this.bCreate) {
+                                this._toggleEdit(false);
+                                oModel.refresh(true);
+                                this.onNavBack();
+                            } else {
+                                this._toggleEdit(false);
                             }
-                        });
-                    },
-                    error: (oError) => {
-                        this.getView().setBusy(false);
-                        MessageBox.error(oError.message);
-                    }
-                });
-            },
+                        }
+                    });
+                },
+                error: (oError) => {
+                    this.getView().setBusy(false);
+                    MessageBox.error(oError.message);
+                }
+            });
+            
+        },
             
             onCancelPressed: function () {
                 const oModel = this.getView().getModel();
@@ -156,6 +159,19 @@ sap.ui.define([
             
                 this._showCustomerFragment("CustomerDisplay");
             },
+
+            _getVal: function(evt) {
+                return evt.getSource().getText();
+            },
+            
+            handleTelPress: function (evt) {
+                sap.m.URLHelper.triggerTel(this._getVal(evt));
+            },
+            
+            handleEmailPress: function (evt) {
+                sap.m.URLHelper.triggerEmail(this._getVal(evt), "Info Request", false, false, false, true);
+            },
+
 
             genderFormatter: function(sKey){
                 let oView = this.getView();

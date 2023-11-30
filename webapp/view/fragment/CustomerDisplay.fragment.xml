@@ -1,45 +1,101 @@
 <core:FragmentDefinition
-	xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
     xmlns:core="sap.ui.core"
     xmlns:u="sap.uxap"
     xmlns:f="sap.ui.layout.form"
     xmlns:s="sap.f.semantic"
-    xmlns="sap.m">
-    <u:ObjectPageSection>
+    xmlns="sap.m"
+>
+    <u:ObjectPageSection title="Kundeninformationen">
         <u:subSections>
-            <u:ObjectPageSubSection>
+            <u:ObjectPageSubSection titleUppercase="true">
                 <u:blocks>
-                    <f:SimpleForm title="{Firstname} {Lastname}" editable="true">
-                        <Label text="{i18n>app.customerid}" labelFor="customerid" />
-                        <Text  text="{Customerid}" />
+                    <f:SimpleForm title="Grunddaten">
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Firstname/@sap:label}"
+                            labelFor="firstname"
+                        />
+                        <Text
+                            id="firstname"
+                            text="{Firstname}"
+                        />
 
-                        <Label text="{i18n>app.firstname}" labelFor="firstname" />
-                        <Text  text="{Firstname}" />
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Lastname/@sap:label}"
+                            labelFor="lastname"
+                        />
+                        <Text
+                            id="lastname"
+                            text="{Lastname}"
+                        />
 
-                        <Label text="{i18n>app.lastname}" labelFor="lastname" />
-                        <Text  text="{Lastname}" />
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Title/@sap:label}"
+                            labelFor="title"
+                        />
+                        <Text
+                            id="title"
+                            text="{Title}"
+                        />
 
-                        <Label text="{i18n>app.title}" labelFor="title" />
-                        <Text  text="{Title}" />
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Gender/@sap:label}"
+                            labelFor="gender"
+                        />
+                        <Text
+                            id="gender"
+                            text="{= ${Gender} === '1' ? ${i18n>female} : ${i18n>male} }"
+                        />
 
-                        <Label text="{i18n>app.gender}" labelFor="gender" />
-                        <Text  text="{= ${gender} === '1' ? ${i18n>female} : ${i18n>male} }" />
-
-                        <Label text="{i18n>app.email}" labelFor="email" />
-                        <Text  text="{Email}" />
-
-                        <Label text="{i18n>app.phone}" labelFor="phone" />
-                        <Text  text="{Phone}" />
-
-                        <Label text="{i18n>app.website}" labelFor="website" />
-                        <Text  text="{Website}" />
-
-                        <Label text="{i18n>app.birthdate}" labelFor="birthdate" />
-                        <Text  text="{path: 'Birthdate', formatter: '.dateFormatter'}" />
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Birthdate/@sap:label}"
+                            labelFor="birthdate"
+                        />
+                        <Text
+                            id="birthdate"
+                            text="{path: 'Birthdate', formatter: '.dateFormatter'}"
+                        />
                     </f:SimpleForm>
                 </u:blocks>
-            </u:ObjectPageSubSection>             
+            </u:ObjectPageSubSection>
+
+            <u:ObjectPageSubSection>
+                <u:blocks>
+                    <f:SimpleForm title="{i18n>fragment.edit.contact}">
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Email/@sap:label}"
+                            labelFor="fragment_display_email"
+                        />
+                        <Link
+                            id="fragment_display_email"
+                            text="{Email}"
+                            press="handleEmailPress"
+                        />
+
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Phone/@sap:label}"
+                            labelFor="fragment_display_phone"
+                        />
+                        <Link
+                            id="fragment_display_phone"
+                            text="{Phone}"
+                            press="handleTelPress"
+                        />
+
+                        <Label
+                            text="{/#Z_P_CUSTOMERType/Website/@sap:label}"
+                            labelFor="fragment_display_website"
+                        />
+                        <Link
+                            id="fragment_display_website"
+                            text="{Website}"
+                            href="https://{Website}"
+                            target="_blank"
+                        />
+                    </f:SimpleForm>
+                </u:blocks>
+            </u:ObjectPageSubSection>
         </u:subSections>
     </u:ObjectPageSection>
 </core:FragmentDefinition>
-
