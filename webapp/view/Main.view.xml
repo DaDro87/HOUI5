@@ -6,6 +6,8 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
+    xmlns:st="sap.ui.comp.smarttable" 
+    xmlns:sfb="sap.ui.comp.smartfilterbar">
 >
     <s:SemanticPage id="main_page">
         <s:titleHeading>
@@ -25,6 +27,20 @@
             </OverflowToolbar>
         </s:titleHeading>
         <s:content>
+
+            <!-- <VBox fitContainer="true">
+                <sfb:SmartFilterBar id="main_smartFilterBar" entitySet="Z_P_CUSTOMER" persistencyKey="SmartFilter_Explored"/>
+                    
+                <st:SmartTable entitySet="Z_P_CUSTOMER" initiallyVisibleFields="Firstname,Lastname,Title,Phone" smartFilterId="main_smartFilterBar"
+                tableType="ResponsiveTable" enableExport="true" useVariantManagement="true" useTablePersonalisation="true" header="{i18n>main.table.title}"
+                showRowCount="true" enableAutoBinding="true" class="sapUiResponsiveContentPadding" enableAutoColumnWidth="true"/>
+                    
+            </VBox> -->
+        <!-- <st:SmartTable 
+            entitySet="Z_P_CUSTOMER">
+
+        </st:SmartTable> -->
+
             <Table
                 items="{/Z_P_CUSTOMER}"
                 id="main_table"
@@ -36,13 +52,13 @@
                     <Column id="main_column_firstname">
                         <Text
                             id="main_text_firstname"
-                            text="{/#Z_P_CUSTOMER/Firstname/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Firstname/@sap:label}"
                         />
                     </Column>
                     <Column id="main_column_lastname">
                         <Text
                             id="main_text_lastname"
-                            text="{/#Z_P_CUSTOMER/Lastname/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Lastname/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -52,7 +68,7 @@
                     >
                         <Text
                             id="main_text_title"
-                            text="{/#Z_P_CUSTOMER/Title/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Title/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -61,7 +77,7 @@
                     >
                         <Text
                             id="main_text_gender"
-                            text="{/#Z_P_CUSTOMER/Gender/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Gender/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -71,7 +87,7 @@
                     >
                         <Text
                             id="main_text_birthdate"
-                            text="{/#Z_P_CUSTOMER/Birthdate/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Birthdate/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -80,7 +96,7 @@
                     >
                         <Text
                             id="main_text_email"
-                            text="{/#Z_P_CUSTOMER/Email/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Email/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -89,7 +105,7 @@
                     >
                         <Text
                             id="main_text_phone"
-                            text="{/#Z_P_CUSTOMER/Phone/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Phone/@sap:label}"
                         />
                     </Column>
                     <Column
@@ -98,7 +114,7 @@
                     >
                         <Text
                             id="main_text_website"
-                            text="{/#Z_P_CUSTOMER/Website/@sap:label}"
+                            text="{/#Z_P_CUSTOMERType/Website/@sap:label}"
                         />
                     </Column>
                 </columns>

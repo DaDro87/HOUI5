@@ -1,27 +1,40 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "at/clouddna/training02/zhoui5/controller/BaseController",
     "sap/m/MessageBox",
-    "at/clouddna/training02/zhoui5/data/formatter/Formatter"
+    "at/clouddna/training02/zhoui5/data/formatter/Formatter",
+    "at/clouddna/training02/zhoui5/controller/formatter/HOUI5Formatter"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, Formatter ) {
+    function (BaseController,
+	MessageBox,
+	Formatter,
+	HOUI5Formatter ) {
         "use strict";
 
-        return Controller.extend("at.clouddna.training02.zhoui5.controller.Main", {
+        return BaseController.extend("at.clouddna.training02.zhoui5.controller.Main", {...HOUI5Formatter,
 
-            formatter: Formatter,
+            formatter: HOUI5Formatter,
             onInit: function () {
 
             },
 
             onListItemClicked: function(oEvent) {
-                const sPath = oEvent.getSource().getBindingContext().getPath();
+                
+                let oRouter = this.getOwnerComponent().getRouter();
+
+                let sPath = oEvent.getSource().getBindingContext().getPath();
+
+                oRouter.navTo("RouteCustomer", { path: encodeURIComponent(sPath) });
+                
+                
+                
+                // const sPath = oEvent.getSource().getBindingContext().getPath().substring(1);
             
-                this.getOwnerComponent().getRouter().navTo("RouteCustomer", {
-                    path: encodeURIComponent(sPath)
-                }, false);
+                // this.getRouter().navTo("RouteCustomer", {
+                //     path: sPath
+               
             },
 
             _getVal: function(evt) {
@@ -43,10 +56,10 @@ sap.ui.define([
                 const oListItem = oEvent.getParameters().listItem;
                 const oModel = this.getView().getModel();
                 const sPath = oListItem.getBindingContext().getPath();
-                const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
+                // const oResourceBundle = this.getView().getModel("i18n").getResourceBundle();
             
-                MessageBox.warning(oResourceBundle.getText("sureToDeleteQuestion"), {
-                    title: oResourceBundle.getText("sureToDeleteTitle"),
+                MessageBox.warning(this.getLocalizedText("sureToDeleteQuestion"), {
+                    title: this.getLocalizedText("sureToDeleteTitle"),
                     actions: [MessageBox.Action.YES, MessageBox.Action.NO],
                     emphasizedAction: MessageBox.Action.YES,
                     onClose: (oAction)=>{
@@ -57,7 +70,7 @@ sap.ui.define([
                                 success: (oData, response) => {
                                     this.getView().setBusy(false);
             
-                                    MessageBox.success(oResourceBundle.getText("dialog.delete.success"));
+                                    MessageBox.success(this.getLocalizedText("dialog.delete.success"));
                                     oModel.refresh(true);
                                 },
                                 error: (oError) => {

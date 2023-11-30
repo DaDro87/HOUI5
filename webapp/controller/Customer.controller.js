@@ -1,28 +1,30 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "at/clouddna/training02/zhoui5/controller/BaseController",
     "sap/m/MessageBox",
     "sap/ui/model/json/JSONModel",
     "sap/ui/core/Fragment",
     "at/clouddna/training02/zhoui5/data/formatter/Formatter",
+    "at/clouddna/training02/zhoui5/controller/formatter/HOUI5Formatter",
     "sap/ui/core/routing/History"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,
+    function (BaseController,
 	MessageBox,
 	JSONModel,
 	Fragment,
 	Formatter,
+    HOUI5Formatter,
     History) {
     /* ... */
         "use strict";
 
-        return Controller.extend("at.clouddna.training02.zhoui5.controller.Customer", {
+        return BaseController.extend("at.clouddna.training02.zhoui5.controller.Customer", {...HOUI5Formatter,
 
             _fragmentList: {},
 
-            formatter: Formatter,
+            formatter: HOUI5Formatter,
 
             onInit: function () {
                 let oEditModel = new JSONModel({
@@ -32,6 +34,8 @@ sap.ui.define([
                 this.getView().setModel(oEditModel, "editModel");
 
                 let oRouter = this.getOwnerComponent().getRouter();
+
+                this.setContentDensity();
                             
                 oRouter.getRoute("RouteCustomer").attachPatternMatched(this._onPatternMatched, this);
 
