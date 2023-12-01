@@ -5,7 +5,8 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "at/clouddna/training02/zhoui5/data/formatter/Formatter",
     "at/clouddna/training02/zhoui5/controller/formatter/HOUI5Formatter",
-    "sap/ui/core/routing/History"
+    "sap/ui/core/routing/History",
+    "sap/ui/core/Item"
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
@@ -176,6 +177,96 @@ sap.ui.define([
                 sap.m.URLHelper.triggerEmail(this._getVal(evt), "Info Request", false, false, false, true);
             },
 
+            onOpenAttachments: function(oEvent) {
+                if (!this._pDialog) {
+                    this._pDialog = Fragment.load({
+                        id: this.getView().getId(),
+                        name: "at.clouddna.training02.zhoui5.view.fragment.AttachmentDialog",
+                        controller: this
+                    }).then((oDialog)=>{
+                        this.getView().addDependent(oDialog);
+                        return oDialog;
+                    });
+                }
+                
+                this._pDialog.then(function (oDialog) {
+                    oDialog.open();
+                }.bind(this));
+            },
+
+            onAfterItemAdded: function(oEvent){
+                const oUploadSet = this.getView().byId("attachments_uploadset");
+                const oUploadSetItem = oEvent.getParameters().item;
+                const sPath = this.getView().getBindingContext().sPath;
+            
+                oUploadSet.removeAllHeaderFields();
+            
+                this.getView().setBusy(true);
+            
+                this.getView().getModel().create(sPath + "/to_CustomerDocument", {}, {
+                    success: (oData, response)=>{
+                        this.getView().setBusy(false);
+                        
+                        oUploadSet.addHeaderField(new Item({
+                            key: "X-CSRF-Token",
+                            text: this.getView().getModel().getSecurityToken()
+                        }));
+            
+                        oUploadSet.addHeaderField(new Item({
+                            key: "Content-Disposition",
+                            text: `filename=${oUploadSetItem.getFileName()}`
+                        }));
+            
+                        oUploadSet.setUploadUrl(`${this.getModel().sServiceUrl}/Z_C_CUSTOMERDOCUMENT(guid'${oData.Documentid}')/$value`);
+                        
+                        oUploadSet.setHttpRequestMethod("PUT");
+            
+                        oUploadSet.uploadItem(oUploadSetItem);
+                    },
+                    error: (oError)=>{
+                        this.getView().setBusy(false);
+                        MessageBox.error(oError.message);
+                    }
+                });
+            },
+
+            formatUrl: function(sDocumentid){
+                const sPath = this.getView().getModel().createKey("/Z_C_CUSTOMERDOCUMENT", {
+                    Documentid: sDocumentid
+                });
+            
+                return this.getView().getModel().sServiceUrl + sPath + "/$value";
+            },
+            onUploadCompleted: function(){
+                this.getView().setBusy(false);
+                this.getView().getModel().refresh(true);
+            },
+            
+            onRemovePressed: function(oEvent){
+                oEvent.preventDefault();
+            
+                const oModel = this.getView().getModel();
+                const sPath = oEvent.getSource().getBindingContext().getPath();
+            
+                this.getView().setBusy(true);
+                this.getView().getModel().remove(sPath, {
+                    success: (oData, response)=>{
+                        this.getView().setBusy(false);
+                        MessageBox.success(this.getLocalizedText("dialog.delete.success"));
+                        oModel.refresh(true);
+                    },
+                    error: (oError)=>{
+                        this.getView().setBusy(false);
+                        MessageBox.error(oError.message);
+                    }
+                });
+            },
+            
+            onAttachmentsDialogClose: function(){
+                this._pDialog.then(function(oDialog){
+                    oDialog.close();
+                }.bind(this));
+            },
 
             genderFormatter: function(sKey){
                 let oView = this.getView();

@@ -43,6 +43,10 @@
                             visible="{= !${editModel>/editmode}}"
                             class="sapUiTinyMarginEnd"
                         />
+                        <Button id="cust_button_attachments" text="{i18n>cust.attachments}"
+                            visible="{= !${editModel>/editmode} }" icon="sap-icon://attachment"
+                            press=".onOpenAttachments"/>
+
                     </HBox>
                 </u:actions>
             </u:ObjectPageDynamicHeaderTitle>
